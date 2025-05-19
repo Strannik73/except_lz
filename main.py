@@ -1,9 +1,7 @@
-from obr import obrabotka
+import obr as ob
 
 def main():
-    obr_a = obrabotka('var3.csv')
-    obr_a = obrabotka('var3i.csv')
-    obr_a.dann()
+    ob.main()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

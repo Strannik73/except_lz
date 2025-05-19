@@ -1,61 +1,44 @@
 import pandas as pd
-#from __ import __
 
-
-class obrabotka:
-    def __init__(self): 
-        self.df = pd.read_csv('var3.csv')
-        self.dfi = pd.read_csv('var3i.csv')
+class Tester:
+    def __init__(self, df):
+        try:
+            self.df = pd.read_csv(df)
+        except FileNotFoundError:
+            print('отсутствует файл')
+            raise SystemExit()
+        
+        except pd.errors.EmptyDataError:
+            print('файл пуст')
+            raise SystemExit()
+        
         
         try:
-            self.df = self.dfi
-        except FileNotFoundError:
-            print('файла нет')
-            raise
-        except pd.errors.EmptyDataError:
-            print('файл пустой')
-            raise
-        
-        try:    
-            if self.df != self.dfi:
+            v3 = self.df.columns.to_list()
+            self.data = pd.read_csv('var3.csv')
+            v3i = self.data.columns.to_list()
+            if v3 != v3i:
                 raise TypeError 
         except TypeError:
             print('ошибка в колонках')
             
+            
         try:
-            self.v3 = str(self.df.dtypes)
-            self.v3i = str(self.dfi.dtypes)
-            if self.v3 != self.v3i: 
-                print('другой тип данных')
-                raise TypeError 
+            self.d1 = str(self.df.dtypes)
+            self.d2 = str(self.data.dtypes)
+            
+            if self.d1 == self.d2:
+                raise TypeError('проблем нет')
             else:
-                print('есть совпадение')
+                print('другой тип данных')
         except TypeError:
-            print('несовпадение файлов ожидплся изменный файл')
-                
-        
-    def __del__(self):
-        print('удаление')
+            print('разные файлы')
 
 
 def main():
-    obr_a = obrabotka('var3.csv')
-    obr_a = obrabotka('var3i.csv')
-    obr_a.dann()
+    df = 'var3i.csv'            
+    df = Tester(df)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
